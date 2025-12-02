@@ -1,4 +1,4 @@
-import 'package:aoc_2024/lib.dart';
+import 'package:aoc_shared/shared.dart';
 import 'package:aoc_2024/day23/part_1.dart' as part1;
 import 'package:aoc_2024/day23/part_2.dart' as part2;
 import 'package:aoc_2024/day23/part_2bk.dart' as part2_bk;
