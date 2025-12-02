@@ -16,6 +16,8 @@ dependencies:
 
   aoc_2024:
     path: aoc_2024
+  aoc_2025:
+    path: aoc_2025
   aoc_shared:
     path: aoc_shared
 
