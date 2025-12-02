@@ -1,4 +1,5 @@
 import 'package:aoc_2025/day2/part_1.dart' as part1;
+import 'package:aoc_2025/day2/part_2.dart' as part2;
 import 'package:aoc_shared/shared.dart';
 
 Future<void> main(List<String> arguments) async {
@@ -6,6 +7,6 @@ Future<void> main(List<String> arguments) async {
     year: Year.y2025,
     day: Day.day2,
     part1: part1.calculate,
-    part2: (unused) => Future.value(0),
+    part2: part2.calculate,
   );
 }
