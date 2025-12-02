@@ -81,7 +81,7 @@ final class Resources {
 
   /// Create a file reference for the given day.
   File fileByName(final Year year, final String name) =>
-      _internalFile(rootDir: year.rootDir, name: name);
+      _internalFile(rootDir: '', name: name);
 
   File _internalFile({required String rootDir, required String name}) {
     final folder = switch (type) {
