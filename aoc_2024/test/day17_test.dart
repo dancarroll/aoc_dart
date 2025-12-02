@@ -5,11 +5,12 @@ import 'package:aoc_2024/day17/part_2.dart' as part2;
 import 'package:test/test.dart';
 
 void main() {
+  final year = Year.y2024;
   final day = Day.day17;
 
   group('sample data', tags: 'sample-data', () {
     final resources = Resources.sample;
-    final file = resources.fileForCurrentYear(day);
+    final file = resources.file(year, day);
 
     test('part1', () async {
       expect(await part1.calculate(file), '4,6,3,5,6,3,5,2,1,0');
@@ -22,7 +23,7 @@ void main() {
 
   group('real data', tags: 'real-data', () {
     final resources = Resources.real;
-    final file = resources.fileForCurrentYear(day);
+    final file = resources.file(year, day);
 
     test('part1', () async {
       expect(await part1.calculate(file), '2,1,4,0,7,4,0,2,3');

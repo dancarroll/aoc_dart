@@ -74,14 +74,9 @@ final class Resources {
   /// Create a file reference for the given year and day.
   File file(Year year, Day day) => fileByName(year, day.name);
 
-  /// Create a file reference for the given day. This only works for references
-  /// from within a year sub-package.
-  File fileForCurrentYear(final Day day) =>
-      _internalFile(rootDir: '', name: day.name);
-
   /// Create a file reference for the given day.
   File fileByName(final Year year, final String name) =>
-      _internalFile(rootDir: '', name: name);
+      _internalFile(rootDir: year.rootDir, name: name);
 
   File _internalFile({required String rootDir, required String name}) {
     final folder = switch (type) {
@@ -89,7 +84,13 @@ final class Resources {
       ResourceType.real => 'real_data',
       ResourceType.fun => 'fun_data',
     };
-    return File(path.join(rootDir, 'resources', folder, '$name.txt'));
+
+    // Check to see if the current directory already ends with the root
+    // directory name. This is intended to support running code like tests
+    // from either the root package directory, or within the subpackage
+    // directory.
+    final pathPrefix = path.current.endsWith(rootDir) ? '' : rootDir;
+    return File(path.join(pathPrefix, 'resources', folder, '$name.txt'));
   }
 
   @override
