@@ -11,6 +11,7 @@ final _stopwatch = Stopwatch();
 /// Runs both parts for a day, and prints their output as well as the
 /// elapsed time to run each part.
 Future<void> runDay({
+  required final Year year,
   required final Day day,
   required final DayFunction part1,
   required final DayFunction part2,
@@ -18,7 +19,7 @@ Future<void> runDay({
   runSample = true,
   runReal = true,
 }) async {
-  print('Advent of Code - Day ${day.number}');
+  print('Advent of Code - Year ${year.number} - Day ${day.number}');
   for (final resource in [
     if (runSample) Resources.sample,
     if (runReal) Resources.real,
@@ -30,7 +31,7 @@ Future<void> runDay({
       (description: '2', function: part2),
       ...additional,
     ]) {
-      final file = resource.file(day);
+      final file = resource.file(year, day);
       await runFile(file: file, func: part.function, part: part.description);
     }
   }

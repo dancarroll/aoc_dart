@@ -5,6 +5,7 @@ import 'package:aoc_2024/day23/part_2bk.dart' as part2_bk;
 
 Future<void> main(List<String> arguments) async {
   await runDay(
+    year: Year.y2024,
     day: Day.day23,
     part1: part1.calculate,
     part2: part2.calculate,

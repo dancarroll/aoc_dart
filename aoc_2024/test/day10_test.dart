@@ -8,7 +8,7 @@ void main() {
 
   group('sample data', tags: 'sample-data', () {
     final resources = Resources.sample;
-    final file = resources.file(day);
+    final file = resources.fileForCurrentYear(day);
 
     test('part1', () async {
       expect(await part1.calculate(file), 36);
@@ -21,7 +21,7 @@ void main() {
 
   group('real data', tags: 'real-data', () {
     final resources = Resources.real;
-    final file = resources.file(day);
+    final file = resources.fileForCurrentYear(day);
 
     test('part1', () async {
       expect(await part1.calculate(file), 587);
