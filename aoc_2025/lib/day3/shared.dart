@@ -1,7 +1,7 @@
 import 'dart:io';
 
-Future<List<String>> loadData(File file) async {
+Future<List<List<int>>> loadData(File file) async {
   final lines = await file.readAsLines();
 
-  return lines;
+  return lines.map((l) => l.split('').map(int.parse).toList()).toList();
 }

@@ -12,7 +12,7 @@ void main() {
     final file = resources.file(year, day);
 
     test('part1', () async {
-      expect(await part1.calculate(file), 0);
+      expect(await part1.calculate(file), 357);
     });
 
     test('part2', () async {
@@ -25,7 +25,7 @@ void main() {
     final file = resources.file(year, day);
 
     test('part1', () async {
-      expect(await part1.calculate(file), 0);
+      expect(await part1.calculate(file), 17301);
     });
 
     test('part2', () async {
