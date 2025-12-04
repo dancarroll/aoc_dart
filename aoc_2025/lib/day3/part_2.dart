@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:collection/collection.dart';
+
 import 'shared.dart';
 
 /// Following from Part 1, instead of creating a voltage by picking
@@ -11,7 +13,7 @@ Future<int> calculate(File file) async {
 
   int sum = 0;
   for (final bank in input) {
-    sum += findMaxValueForSequence(0, bank);
+    sum += findMaxValueForSequence(bank);
   }
 
   return sum;
@@ -20,58 +22,36 @@ Future<int> calculate(File file) async {
 /// The target sequence length is fixed at 12 digits.
 const int sequenceLength = 12;
 
-/// Recursive function to process the maximum value possible given
-/// a current value and the remaining digits available to be used.
-int findMaxValueForSequence(int curr, List<int> remaining) {
-  final neededDigits = sequenceLength - curr.toString().length;
-  if (neededDigits < 0) {
-    return 0;
-  } else if (neededDigits == 0) {
-    return curr;
-  }
+/// Function to process the maximum value possible given a sequence
+/// of digits.
+int findMaxValueForSequence(List<int> sequence) {
+  var remaining = sequence;
+  int maxValue = 0;
 
-  if (remaining.length == 1) {
-    assert(neededDigits == 1, "Unexpected number of digits remaining");
-    return curr * 10 + remaining[0];
-  }
-
-  // While processing this partial sequence, keep track of two values:
-  // the maximum total value possible given this partial sequence, and
-  // the maximum value possible when adding the next digit.
-  int maxTotal = 0;
-  int maxNext = 0;
-
-  // Create new potential sequences by picking the next value. A
-  // valid sequence can only be made if there will be enough remaining
-  // digits later, which is why this iteration does not process over
-  // the entire remaining list.
-
-  for (int i = 0; i <= remaining.length - neededDigits; i++) {
-    // Determing the value when adding the next digit.
-    final potential = curr * 10 + remaining[i];
-
-    // Given the input `curr`, we just want to find the biggest next digit to
-    // add. Don't bother processing the other potential sequences.
-    // This step is essential to avoid a ton of unnecessary processing that
-    // would cause the solver to take a very long time to run.
-    if (potential > maxNext) {
-      maxNext = potential;
-    } else {
-      continue;
-    }
-
-    // For sequences we are processing, recursively generate the rest of the
-    // sequence.
-    final maxForPotential = findMaxValueForSequence(
-      potential,
-      remaining.sublist(i + 1),
+  // Iterate for each of the 12 digits needed.
+  for (int i = 0; i < sequenceLength; i++) {
+    // We are eagerly picking the highest next digit, but need to make
+    // sure there are enough digits remaining to reach 12 digits. So
+    // only process the remaining digit list up to the point where we'd
+    // have enough remaining digits to complete the full number.
+    final validOptionsForNextDigit = remaining.sublist(
+      0,
+      remaining.length - 12 + i + 1,
     );
 
-    // Store the biggest total value seen.
-    if (maxForPotential > maxTotal) {
-      maxTotal = maxForPotential;
-    }
+    // At each point, we just want to select the highest next digit, since
+    // we are building the number from left to right. If there are multiple
+    // with the same value, we select the first (left-most), as this retains
+    // the most flexibility in finding the highest next digit.
+    final maxDigitIndex = validOptionsForNextDigit.indexOf(
+      validOptionsForNextDigit.max,
+    );
+
+    // Store this digit, and then update the remaining list to just include
+    // everything after the selected digit.
+    maxValue = maxValue * 10 + remaining.elementAt(maxDigitIndex);
+    remaining = remaining.sublist(maxDigitIndex + 1);
   }
 
-  return maxTotal;
+  return maxValue;
 }
