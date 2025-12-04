@@ -8,6 +8,5 @@ Future<void> main(List<String> arguments) async {
     day: Day.day3,
     part1: part1.calculate,
     part2: part2.calculate,
-    runReal: true,
   );
 }
