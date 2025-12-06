@@ -1,7 +1,3 @@
-import 'dart:io';
-
-import 'package:collection/collection.dart';
-
 /// Represents the operator of an equation.
 enum Operator {
   unknown,
@@ -26,8 +22,12 @@ enum Operator {
 /// Represents an equation with several operands, and an
 /// operator that should be applied to each.
 final class Equation {
-  final List<int> operands = [];
-  Operator operator = Operator.unknown;
+  final List<int> operands;
+  Operator operator;
+
+  Equation(this.operands, this.operator);
+
+  factory Equation.empty() => Equation([], Operator.unknown);
 
   /// Evaluates the operation.
   int evaluate() {
@@ -37,30 +37,4 @@ final class Equation {
     }
     return value;
   }
-}
-
-Future<List<Equation>> loadData(File file) async {
-  final lines = await file.readAsLines();
-  List<Equation> equations = [];
-
-  for (final line in lines) {
-    final parts = line.split(' ').whereNot((s) => s.isEmpty).toList();
-
-    for (int i = 0; i < parts.length; i++) {
-      if (equations.length <= i) {
-        equations.add(Equation());
-      }
-
-      final equation = equations[i];
-
-      final maybeInt = int.tryParse(parts[i]);
-      if (maybeInt == null) {
-        equation.operator = Operator.fromString(parts[i]);
-      } else {
-        equation.operands.add(maybeInt);
-      }
-    }
-  }
-
-  return equations;
 }
