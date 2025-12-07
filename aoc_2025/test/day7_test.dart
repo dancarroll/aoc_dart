@@ -16,7 +16,7 @@ void main() {
     });
 
     test('part2', () async {
-      expect(await part2.calculate(file), 0);
+      expect(await part2.calculate(file), 40);
     });
   });
 
@@ -29,7 +29,7 @@ void main() {
     });
 
     test('part2', () async {
-      expect(await part2.calculate(file), 0);
+      expect(await part2.calculate(file), 20571740188555);
     });
   });
 }
