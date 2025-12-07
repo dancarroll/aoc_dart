@@ -1,9 +1,15 @@
 import 'dart:io';
 import 'dart:math';
 
+/// Represents the manifold in which the tachyon beams travel.
 final class Manifold {
+  /// Starting position of the first beam.
   final Point<int> start;
+
+  /// Location of beam splitters in the manifold.
   final Set<Point<int>> splitters;
+
+  /// Total height of the manifold.
   final int height;
 
   Manifold(this.start, this.splitters, this.height);
