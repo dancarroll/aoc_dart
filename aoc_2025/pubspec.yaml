@@ -12,6 +12,7 @@ dependencies:
   collection: ^1.19.1
   quiver: ^3.2.2
   clique: ^1.0.2
+  vector_math: ^2.2.0
 
   aoc_shared:
     path: ../aoc_shared
