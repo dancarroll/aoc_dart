@@ -3,9 +3,21 @@ import 'dart:io';
 import 'package:aoc_shared/shared.dart';
 import 'package:vector_math/vector_math.dart';
 
+/// Represents a result of processing junction box connections.
+final class CircuitResult {
+  /// The final state of the circuits created.
+  final List<Set<Vector3>> circuits;
+
+  // The last connection made.
+  final (Vector3, Vector3) lastConnection;
+
+  CircuitResult(this.circuits, this.lastConnection);
+}
+
 /// Represents the playground in the problem, with junction boxes laid
 /// out in 3D space.
 final class Playground {
+  // Initial list of all of the junction boxes.
   final List<Vector3> junctions;
 
   Playground(this.junctions);
@@ -23,9 +35,7 @@ final class Playground {
 
   /// Iterate through the junction pairs, up until [maxConnections],
   /// connecting them until there is a single circuit.
-  List<Set<Vector3>> createCircuitsUntilComplete({
-    required int maxConnections,
-  }) {
+  CircuitResult createCircuitsUntilComplete({required int maxConnections}) {
     // Create all of the pairs, and sort by shortest distance.
     final pointPairs = pairsByShortestDistance();
 
@@ -34,8 +44,9 @@ final class Playground {
 
     // Iterate through the number of connections we need to make, picking the
     // shortest distances first.
+    late (Vector3, Vector3) pair;
     for (int i = 0; i < maxConnections; i++) {
-      final pair = pointPairs[i];
+      pair = pointPairs[i];
 
       // Find the circuits that contain each of the points being processed.
       final circuitsWithPair = circuits
@@ -60,8 +71,14 @@ final class Playground {
             'Unexpected number of circuits containing pair: $circuitsWithPair',
           );
       }
+
+      // If this was the last connection, exit early in order to preserve
+      // the last connection.
+      if (circuits.length == 1) {
+        break;
+      }
     }
-    return circuits;
+    return CircuitResult(circuits, pair);
   }
 }
 

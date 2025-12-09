@@ -20,13 +20,13 @@ Future<int> calculate(File file) async {
 
   // Run the logic to combine junctions into circuits, up to the max
   // number of connections.
-  final circuits = playground.createCircuitsUntilComplete(
+  final circuitResult = playground.createCircuitsUntilComplete(
     maxConnections: connectionsToMake,
   );
 
   // Finally, take the top three biggest circuits, and return the result of
   // multiplying the circuit sizes together.
-  final value = circuits
+  final value = circuitResult.circuits
       .sortedBy((circuit) => circuit.length)
       .reversed
       .take(3)
