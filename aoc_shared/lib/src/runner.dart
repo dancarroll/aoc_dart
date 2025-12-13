@@ -7,7 +7,7 @@ typedef DayFunction = Future<dynamic> Function(File);
 typedef AdditionalPart = ({
   Part part,
   DayFunction function,
-  String extraDescription,
+  String description,
 });
 
 final _stopwatch = Stopwatch();
@@ -32,8 +32,8 @@ Future<void> runDay({
     print('- $resource data:');
 
     for (final part in [
-      (part: Part.part1, function: part1, extraDescription: ''),
-      (part: Part.part2, function: part2, extraDescription: ''),
+      (part: Part.part1, function: part1, description: ''),
+      (part: Part.part2, function: part2, description: ''),
       ...additional,
     ]) {
       final suffix = fileSuffix == null
@@ -42,7 +42,7 @@ Future<void> runDay({
       final file = resource.file(year, day, filenameSuffix: suffix);
       final description =
           '${part.part.number}'
-          '${part.extraDescription.isEmpty ? '' : ' (${part.extraDescription})'}';
+          '${part.description.isEmpty ? '' : ' (${part.description})'}';
       await runFile(
         file: file,
         func: part.function,

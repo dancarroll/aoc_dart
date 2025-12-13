@@ -13,7 +13,7 @@ Future<void> main(List<String> arguments) async {
       (
         part: Part.part2,
         function: part2_bk.calculate,
-        extraDescription: 'Bron–Kerbosch',
+        description: 'Bron–Kerbosch',
       ),
     ],
   );
