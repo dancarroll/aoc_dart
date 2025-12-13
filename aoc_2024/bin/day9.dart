@@ -15,11 +15,11 @@ Future<void> main(List<String> arguments) async {
   await runFile(
     file: Resources.fun.fileByName(Year.y2024, 'day9_hell'),
     func: part2.calculate,
-    part: 'evil_input',
+    partDescription: 'evil_input',
   );
   await runFile(
     file: Resources.fun.fileByName(Year.y2024, 'day9_hell2'),
     func: part2.calculate,
-    part: 'really_evil_input',
+    partDescription: 'really_evil_input',
   );
 }

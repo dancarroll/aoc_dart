@@ -10,7 +10,11 @@ Future<void> main(List<String> arguments) async {
     part1: part1.calculate,
     part2: part2.calculate,
     additional: [
-      (description: '2 (Bron–Kerbosch)', function: part2_bk.calculate),
+      (
+        part: Part.part2,
+        function: part2_bk.calculate,
+        extraDescription: 'Bron–Kerbosch',
+      ),
     ],
   );
 }

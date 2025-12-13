@@ -9,6 +9,12 @@ Future<void> main(List<String> arguments) async {
     day: Day.day2,
     part1: part1.calculate,
     part2: part2.calculate,
-    additional: [(description: '2 (regex)', function: part_2regex.calculate)],
+    additional: [
+      (
+        part: Part.part2,
+        function: part_2regex.calculate,
+        extraDescription: 'regex',
+      ),
+    ],
   );
 }

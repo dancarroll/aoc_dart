@@ -59,6 +59,14 @@ enum Day {
   String get number => name.substring(3);
 }
 
+/// Represents the part of a day in Advent of Code.
+enum Part {
+  part1,
+  part2;
+
+  String get number => name.substring(4);
+}
+
 /// Manager for loading a resource file, based on type and day.
 final class Resources {
   final ResourceType type;
@@ -72,13 +80,25 @@ final class Resources {
   static Resources get fun => Resources(ResourceType.fun);
 
   /// Create a file reference for the given year and day.
-  File file(Year year, Day day) => fileByName(year, day.name);
+  File file(Year year, Day day, {String? filenameSuffix}) =>
+      fileByName(year, day.name, filenameSuffix: filenameSuffix);
 
   /// Create a file reference for the given day.
-  File fileByName(final Year year, final String name) =>
-      _internalFile(rootDir: year.rootDir, name: name);
+  File fileByName(
+    final Year year,
+    final String name, {
+    String? filenameSuffix,
+  }) => _internalFile(
+    rootDir: year.rootDir,
+    name: name,
+    filenameSuffix: filenameSuffix,
+  );
 
-  File _internalFile({required String rootDir, required String name}) {
+  File _internalFile({
+    required String rootDir,
+    required String name,
+    String? filenameSuffix,
+  }) {
     final folder = switch (type) {
       ResourceType.sample => 'sample_data',
       ResourceType.real => 'real_data',
@@ -90,7 +110,14 @@ final class Resources {
     // from either the root package directory, or within the subpackage
     // directory.
     final pathPrefix = path.current.endsWith(rootDir) ? '' : rootDir;
-    return File(path.join(pathPrefix, 'resources', folder, '$name.txt'));
+    return File(
+      path.join(
+        pathPrefix,
+        'resources',
+        folder,
+        '$name${filenameSuffix ?? ''}.txt',
+      ),
+    );
   }
 
   @override
