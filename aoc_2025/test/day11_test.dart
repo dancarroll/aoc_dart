@@ -9,14 +9,15 @@ void main() {
 
   group('sample data', tags: 'sample-data', () {
     final resources = Resources.sample;
-    final file = resources.file(year, day);
 
     test('part1', () async {
+      final file = resources.file(year, day);
       expect(await part1.calculate(file), 5);
     });
 
     test('part2', () async {
-      expect(await part2.calculate(file), 0);
+      final file = resources.file(year, day, filenameSuffix: '_part2');
+      expect(await part2.calculate(file), 2);
     });
   });
 
@@ -29,7 +30,7 @@ void main() {
     });
 
     test('part2', () async {
-      expect(await part2.calculate(file), 0);
+      expect(await part2.calculate(file), 526811953334940);
     });
   });
 }

@@ -8,6 +8,9 @@ Future<void> main(List<String> arguments) async {
     day: Day.day11,
     part1: part1.calculate,
     part2: part2.calculate,
-    runReal: true,
+    fileSuffix: (part, resourceType) =>
+        (resourceType == ResourceType.sample && part == Part.part2)
+        ? '_part2'
+        : '',
   );
 }
