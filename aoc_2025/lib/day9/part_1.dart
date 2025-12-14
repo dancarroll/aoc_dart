@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:aoc_shared/shared.dart';
@@ -20,7 +19,3 @@ Future<int> calculate(File file) async {
 
   return mostSeparatedPoints.first.$3;
 }
-
-/// Calculates the rectangular area given the two corner points.
-int area(Point<int> a, Point<int> b) =>
-    ((b.x - a.x).abs() + 1) * ((b.y - a.y).abs() + 1);
