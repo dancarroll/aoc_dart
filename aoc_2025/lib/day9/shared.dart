@@ -207,7 +207,8 @@ CapturedRegion findContainedPoints(Set<Point<int>> borderPoints) {
       final borderRow = borderMap[seedY];
       // Check if left-1 is a border
       if (borderRow != null && borderRow.contains(left - 1)) break;
-      // Optimization: Using binary search on borderRow is faster for huge borders
+      // Optimization: Using binary search on borderRow is faster for huge
+      // borders
       left--;
     }
 
@@ -263,12 +264,11 @@ CapturedRegion findContainedPoints(Set<Point<int>> borderPoints) {
     // We subtract Borders and OutsideSpans from it.
 
     // Simplified boolean array approach for the row finalization
-    // Since we process row-by-row, we only allocate one row's worth of memory at a time.
+    // Since we process row-by-row, we only allocate one row's worth of memory
+    // at a time.
     final width = maxX - minX + 1;
     if (width <= 0) continue;
 
-    // We can use a boolean list here because it's only 1 row (e.g. 50k bools = 50KB RAM)
-    // efficient enough.
     final rowIsCaptured = List<bool>.filled(width, true);
 
     // Mark borders as NOT captured
