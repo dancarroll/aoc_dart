@@ -91,13 +91,14 @@ int minPressesToHitTargetJoltage(
         // Count the buttons pressed in the combination being processed.
         combination.length +
         // Recursively call this function for the new target joltage remaining.
-        // This gets multiplied by two, because we divided the target joltages
-        // by 2 above.
         minPressesToHitTargetJoltage(
-          newJoltagesNormalized,
-          machine,
-          cachedValues,
-        ) * 2;
+              newJoltagesNormalized,
+              machine,
+              cachedValues,
+            ) *
+            // This gets multiplied by two, because we divided the target
+            // joltages by 2 above.
+            2;
 
     /// Update min presses if needed.
     minPresses = min(minPresses, result);
