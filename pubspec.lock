@@ -90,10 +90,10 @@ packages:
     dependency: "direct dev"
     description:
       name: build_runner
-      sha256: "110c56ef29b5eb367b4d17fc79375fa8c18a6cd7acd92c05bb3986c17a079057"
+      sha256: b4d854962a32fd9f8efc0b76f98214790b833af8b2e9b2df6bfc927c0415a072
       url: "https://pub.dev"
     source: hosted
-    version: "2.10.4"
+    version: "2.10.5"
   built_collection:
     dependency: transitive
     description:
@@ -478,6 +478,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  vector_math:
+    dependency: transitive
+    description:
+      name: vector_math
+      sha256: d530bd74fea330e6e364cda7a85019c434070188383e1cd8d9777ee586914c5b
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   vm_service:
     dependency: transitive
     description:
