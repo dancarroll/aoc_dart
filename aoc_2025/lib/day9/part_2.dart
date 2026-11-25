@@ -15,19 +15,16 @@ Future<int> calculate(File file) async {
   final input = await loadData(file);
   final polygon = Polygon(input);
 
-  final records = pairs(input)
+  return pairs(input)
       .map(
         (pair) => (
           rectangle: Rectangle.fromPoints(pair.$1, pair.$2),
           area: area(pair.$1, pair.$2),
         ),
       )
-      .sortedBy((record) => record.area)
-      .reversed;
-
-  return records
-      .firstWhere((record) => polygon.containsRectangle(record.rectangle))
-      .area;
+      .where((record) => polygon.containsRectangle(record.rectangle))
+      .map((record) => record.area)
+      .max;
 }
 
 typedef VerticalEdge = ({int x, int minY, int maxY});

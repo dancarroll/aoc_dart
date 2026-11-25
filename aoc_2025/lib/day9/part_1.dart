@@ -12,10 +12,5 @@ import 'shared.dart';
 Future<int> calculate(File file) async {
   final input = await loadData(file);
 
-  final mostSeparatedPoints = pairs(input)
-      .map((pair) => (pair.$1, pair.$2, area(pair.$1, pair.$2)))
-      .sortedBy((record) => record.$3)
-      .reversed;
-
-  return mostSeparatedPoints.first.$3;
+  return pairs(input).map((pair) => area(pair.$1, pair.$2)).max;
 }
