@@ -15,7 +15,7 @@ Future<int> calculate(File file) async {
   final input = await loadData(file);
   final polygon = Polygon(input);
 
-  return pairs(input)
+  return pairsLazy(input)
       .map(
         (pair) => (
           rectangle: Rectangle.fromPoints(pair.$1, pair.$2),

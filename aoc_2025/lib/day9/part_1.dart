@@ -12,5 +12,5 @@ import 'shared.dart';
 Future<int> calculate(File file) async {
   final input = await loadData(file);
 
-  return pairs(input).map((pair) => area(pair.$1, pair.$2)).max;
+  return pairsLazy(input).map((pair) => area(pair.$1, pair.$2)).max;
 }

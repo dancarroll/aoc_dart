@@ -10,6 +10,14 @@ List<(T, T)> pairs<T>(List<T> items) {
   return records;
 }
 
+Iterable<(T, T)> pairsLazy<T>(List<T> items) sync* {
+  for (int i = 0; i < items.length - 1; i++) {
+    for (int j = i + 1; j < items.length; j++) {
+      yield (items[i], items[j]);
+    }
+  }
+}
+
 List<(T, T)> orderedPairs<T>(List<T> items) {
   List<(T, T)> records = [];
   for (final itemA in items) {
