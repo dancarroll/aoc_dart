@@ -29,8 +29,7 @@ void main() {
     });
 
     test('part2', () async {
-      // This is very slow, so not running.
-      // expect(await part2.calculate(file), 1603439684);
+      expect(await part2.calculate(file), 1603439684);
     });
   });
 }
